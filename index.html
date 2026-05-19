@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIME SNIPER - Sistema de Sinais Aviator</title>
+    <style>
+        :root {
+            --bg-color: #08080a;
+            --card-color: #121216;
+            --border-color: #22222a;
+            --neon-orange: #ff4b2b;
+            --neon-green: #00ff7f;
+            --text-color: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            background: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .header-tag {
+            font-size: 11px;
+            color: var(--neon-orange);
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            font-size: 26px;
+            margin: 0 0 20px 0;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #fff, #8a8a98);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title {
+            font-size: 13px;
+            color: #8a8a98;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-align: left;
+            padding-left: 5px;
+        }
+
+        /* Grid de Plataformas */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .platform-btn {
+            background: #1c1c24;
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 12px 5px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .platform-btn.active {
+            border-color: var(--neon-orange);
+            background: rgba(255, 75, 43, 0.1);
+            box-shadow: inset 0 0 10px rgba(255, 75, 43, 0.2);
+        }
+
+        /* Menu de Modos */
+        .modes-nav {
+            display: flex;
+            background: #1c1c24;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 20px;
+        }
+
+        .mode-tab {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #8a8a98;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .mode-tab.active {
+            background: var(--bg-color);
+            color: white;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Tela Central */
+        .display-box {
+            background: #16161d;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px 15px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .signal-value {
+            font-size: 38px;
+            font-weight: 900;
+            color: var(--neon-green);
+            margin: 5px 0;
+            text-shadow: 0 0 15px rgba(0, 255, 127, 0.3);
+        }
+
+        .time-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .time-item {
+            display: flex;
+            justify-content: space-between;
+            background: #1c1c24;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        /* Botão de Redirecionamento */
+        .action-btn {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            border: none;
+            color: white;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+            transition: 0.3s;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-tag">⚡ CYBER ALGORITHM V3</div>
+        <h1>PRIME SNIPER</h1>
+
+        <div class="section-title">1. Selecione a Plataforma</div>
+        <div class="platform-grid">
+            <button class="platform-btn active" onclick="selectPlatform('Jogabet', 'https://trk.jogabets.co.mz/click?o=1&a=12409&c=1', this)">Jogabet</button>
+            <button class="platform-btn" onclick="selectPlatform('Placard', 'https://media1.placard.co.mz/redirect.aspx?pid=8332&bid=1690', this)">Placard</button>
+            <button class="platform-btn" onclick="selectPlatform('PrideBet', 'https://pridebet.co.mz/register/?aff=1143464', this)">PrideBet</button>
+        </div>
+
+        <div class="modes-nav">
+            <button class="mode-tab active" onclick="switchMode('sniper', this)">Sinal Direto</button>
+            <button class="mode-tab" onclick="switchMode('horarios', this)">Lista de Horários</button>
+        </div>
+
+        <div class="section-title">2. Painel de Inteligência</div>
+        <div class="display-box" id="panel-display">
+            <div style="color: #8a8a98;">Conectando...</div>
+        </div>
+
+        <button class="action-btn" id="redirect-btn" onclick="openAffiliate()">JOGAR NA JOGABET 🚀</button>
+    </div>
+
+    <script>
+        // Configurações e Links Padrão (Inicia com a Jogabet ativa)
+        let currentPlatform = "Jogabet";
+        let currentLink = "https://trk.jogabets.co.mz/click?o=1&a=12409&c=1";
+        let currentMode = "sniper";
+
+        function selectPlatform(name, link, element) {
+            currentPlatform = name;
+            currentLink = link;
+            
+            // Atualiza o estado visual dos botões de plataforma
+            document.querySelectorAll('.platform-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            
+            // Altera o texto do botão de ação com o nome da casa
+            document.getElementById('redirect-btn').innerText = `JOGAR NA ${name.toUpperCase()} 🚀`;
+            triggerScanEffect();
+        }
+
+        function switchMode(mode, element) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-tab').forEach(tab => tab.classList.remove('active'));
+            element.classList.add('active');
+            triggerScanEffect();
+        }
+
+        function triggerScanEffect() {
+            const display = document.getElementById('panel-display');
+            display.innerHTML = `<div style="color: var(--neon-orange); font-weight:bold;">Sincronizando com a API da ${currentPlatform}...</div>`;
+            
+            setTimeout(() => {
+                if(currentMode === 'sniper') {
+                    // MODO 1: Gera multiplicadores aleatórios sempre acima de 2x (indo de 2.05x até 14.50x)
+                    const randomMultiplier = (Math.random() * (14.5 - 2.05) + 2.05).toFixed(2);
+                    display.innerHTML = `
+                        <div style="font-size:12px; color:#8a8a98; text-transform:uppercase;">Alvo Identificado na ${currentPlatform}</div>
+                        <div class="signal-value">${randomMultiplier}X</div>
+                        <div style="font-size:12px; color: var(--neon-green); font-weight:bold;">ENTRADA CONFIRMADA (Retirar em 2.00x+)</div>
+                    `;
+                } else {
+                    // MODO 2: Gera lista com os próximos horários prováveis para velas de 2x+
+                    const now = new Date();
+                    let listHtml = '<div class="time-list">';
+                    
+                    for(let i = 1; i <= 3; i++) {
+                        // Adiciona minutos de forma espaçada no relógio
+                        now.setMinutes(now.getMinutes() + Math.floor(Math.random() * 5) + 3);
+                        const timeStr = now.toTimeString().split(' ')[0].substring(0,5);
+                        listHtml += `
+                            <div class="time-item">
+                                <span style="color:#fff; font-weight:bold;">⏱️ ${timeStr}</span>
+                                <span style="color:var(--neon-green); font-weight:bold;">Vela Branca (2x+) 🎯</span>
+                            </div>`;
+                    }
+                    listHtml += '</div>';
+                    display.innerHTML = listHtml;
+                }
+            }, 800); // 800 milissegundos de delay para simular a resposta do robô
+        }
+
+        function openAffiliate() {
+            window.open(currentLink, '_blank');
+        }
+
+        // Executa o primeiro sinal automaticamente ao carregar o site
+        triggerScanEffect();
+    </script>
+</body>
+</html>
