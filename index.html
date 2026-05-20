@@ -1,272 +1,245 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRIME SNIPER - Sistema de Sinais Aviator</title>
+    <title>D9 CLUBE - SIGNAL AI</title>
     <style>
-        :root {
-            --bg-color: #08080a;
-            --card-color: #121216;
-            --border-color: #22222a;
-            --neon-orange: #ff4b2b;
-            --neon-green: #00ff7f;
-            --text-color: #ffffff;
-        }
-
+        /* Cores inspiradas no app de IA das imagens */
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #060913;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 400px;
-            background: var(--card-color);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
             padding: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 380px;
+            background: linear-gradient(135deg, #0a0f24 0%, #070a17 100%);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header {
             text-align: center;
-            box-sizing: border-box;
+            margin-bottom: 24px;
         }
 
-        .header-tag {
-            font-size: 11px;
-            color: var(--neon-orange);
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-        }
-
-        h1 {
-            font-size: 26px;
-            margin: 0 0 20px 0;
-            letter-spacing: 1px;
-            background: linear-gradient(135deg, #fff, #8a8a98);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .section-title {
-            font-size: 13px;
-            color: #8a8a98;
+        .header h1 {
+            font-size: 18px;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            text-align: left;
-            padding-left: 5px;
+            letter-spacing: 2px;
+            color: #00d2ff;
+            margin: 0 0 5px 0;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
         }
 
-        /* Grid de Plataformas */
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        .header span {
+            font-size: 11px;
+            color: #5f6c85;
+            text-transform: uppercase;
+        }
+
+        /* Seleção de Plataformas */
+        .platform-box {
+            display: flex;
             gap: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .platform-btn {
-            background: #1c1c24;
-            border: 1px solid var(--border-color);
-            color: white;
-            padding: 12px 5px;
-            font-size: 13px;
-            font-weight: bold;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #8fa0c0;
+            padding: 12px;
             border-radius: 12px;
             cursor: pointer;
-            transition: 0.3s;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
         }
 
         .platform-btn.active {
-            border-color: var(--neon-orange);
-            background: rgba(255, 75, 43, 0.1);
-            box-shadow: inset 0 0 10px rgba(255, 75, 43, 0.2);
+            background: rgba(0, 210, 255, 0.1);
+            border-color: #00d2ff;
+            color: #00d2ff;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
         }
 
-        /* Menu de Modos */
-        .modes-nav {
-            display: flex;
-            background: #1c1c24;
-            border-radius: 12px;
-            padding: 4px;
-            margin-bottom: 20px;
-        }
-
-        .mode-tab {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: #8a8a98;
-            padding: 10px;
-            font-size: 13px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .mode-tab.active {
-            background: var(--bg-color);
-            color: white;
-            border: 1px solid var(--border-color);
-        }
-
-        /* Tela Central */
-        .display-box {
-            background: #16161d;
-            border: 1px solid var(--border-color);
+        /* Painel de Inteligência */
+        .panel {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 16px;
-            padding: 25px 15px;
-            min-height: 120px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .panel-title {
+            font-size: 11px;
+            color: #5f6c85;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        /* Lista de Horários */
+        .signal-row {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin-bottom: 10px;
         }
 
-        .signal-value {
-            font-size: 38px;
-            font-weight: 900;
-            color: var(--neon-green);
-            margin: 5px 0;
-            text-shadow: 0 0 15px rgba(0, 255, 127, 0.3);
-        }
-
-        .time-list {
-            width: 100%;
+        .signal-time {
+            font-weight: bold;
+            font-size: 15px;
+            color: #ffffff;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             gap: 8px;
         }
 
-        .time-item {
-            display: flex;
-            justify-content: space-between;
-            background: #1c1c24;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 14px;
+        .signal-time::before {
+            content: "🕒";
+            font-size: 12px;
+            opacity: 0.6;
         }
 
-        /* Botão de Redirecionamento */
-        .action-btn {
-            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        .signal-target {
+            font-weight: 600;
+            font-size: 14px;
+            color: #00ff87;
+            text-shadow: 0 0 10px rgba(0, 255, 135, 0.2);
+        }
+
+        /* Botão de Ação Principal */
+        .btn-main {
+            width: 100%;
+            background: linear-gradient(90deg, #0072ff 0%, #00d2ff 100%);
             border: none;
             color: white;
             padding: 16px;
+            border-radius: 14px;
             font-size: 15px;
             font-weight: bold;
-            border-radius: 50px;
             cursor: pointer;
-            width: 100%;
-            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
-            transition: 0.3s;
+            box-shadow: 0 8px 24px rgba(0, 114, 255, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .action-btn:hover {
-            transform: scale(1.02);
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(0, 114, 255, 0.4);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header-tag">⚡ CYBER ALGORITHM V3</div>
-        <h1>PRIME SNIPER</h1>
-
-        <div class="section-title">1. Selecione a Plataforma</div>
-        <div class="platform-grid">
-            <button class="platform-btn active" onclick="selectPlatform('Jogabet', 'https://trk.jogabets.co.mz/click?o=1&a=12409&c=1', this)">Jogabet</button>
-            <button class="platform-btn" onclick="selectPlatform('Placard', 'https://media1.placard.co.mz/redirect.aspx?pid=8332&bid=1690', this)">Placard</button>
-            <button class="platform-btn" onclick="selectPlatform('PrideBet', 'https://pridebet.co.mz/register/?aff=1143464', this)">PrideBet</button>
-        </div>
-
-        <div class="modes-nav">
-            <button class="mode-tab active" onclick="switchMode('sniper', this)">Sinal Direto</button>
-            <button class="mode-tab" onclick="switchMode('horarios', this)">Lista de Horários</button>
-        </div>
-
-        <div class="section-title">2. Painel de Inteligência</div>
-        <div class="display-box" id="panel-display">
-            <div style="color: #8a8a98;">Conectando...</div>
-        </div>
-
-        <button class="action-btn" id="redirect-btn" onclick="openAffiliate()">JOGAR NA JOGABET 🚀</button>
+<div class="app-container">
+    <div class="header">
+        <h1>Signal AI</h1>
+        <span>Mini App v3.0</span>
     </div>
 
-    <script>
-        // Configurações e Links Padrão (Inicia com a Jogabet ativa)
-        let currentPlatform = "Jogabet";
-        let currentLink = "https://trk.jogabets.co.mz/click?o=1&a=12409&c=1";
-        let currentMode = "sniper";
+    <div class="platform-box">
+        <button class="platform-btn active" onclick="selectPlatform('placard', this)">Placard</button>
+        <button class="platform-btn" onclick="selectPlatform('megagamelive', this)">Megagamelive</button>
+    </div>
 
-        function selectPlatform(name, link, element) {
-            currentPlatform = name;
-            currentLink = link;
+    <div class="panel">
+        <div class="panel-title">Horários Identificados</div>
+        <div id="signals-list">
+            </div>
+    </div>
+
+    <button class="btn-main" id="action-btn" onclick="goToPlatform()">Jogar na Placard 🚀</button>
+</div>
+
+<script>
+    // Configurações iniciais
+    let currentPlatform = 'placard';
+    const links = {
+        placard: "https://www.placard.co.mz", // Coloque o link correto da Placard aqui se tiver
+        megagamelive: "https://www.megagamelive.com/affiliates/?btag=2504724"
+    };
+
+    // Função para alternar entre as plataformas
+    function selectPlatform(platform, element) {
+        currentPlatform = platform;
+        
+        // Atualiza botões ativos
+        document.querySelectorAll('.platform-btn').forEach(btn => btn.classList.remove('active'));
+        element.classList.add('active');
+        
+        // Atualiza o texto do botão de ação inferior
+        const btnMain = document.getElementById('action-btn');
+        if(platform === 'megagamelive') {
+            btnMain.innerText = "Jogar na Megagamelive 🚀";
+        } else {
+            btnMain.innerText = "Jogar na Placard 🚀";
+        }
+        
+        // Gera novos horários simulando uma nova análise para a casa selecionada
+        generateSignals();
+    }
+
+    // Redirecionamento do botão
+    function goToPlatform() {
+        window.open(links[currentPlatform], '_blank');
+    }
+
+    // Gerador de Horários Inteligente (Intervalo de 3 a 5 min | 5 Horários | Regra do 3x)
+    function generateSignals() {
+        const container = document.getElementById('signals-list');
+        container.innerHTML = ''; // Limpa a lista anterior
+        
+        let now = new Date();
+        
+        for (let i = 0; i < 5; i++) {
+            // Gera um intervalo aleatório estrito entre 3 e 5 minutos
+            let randomMinutes = Math.floor(Math.random() * (5 - 3 + 1)) + 3;
+            now.setMinutes(now.getMinutes() + randomMinutes);
             
-            // Atualiza o estado visual dos botões de plataforma
-            document.querySelectorAll('.platform-btn').forEach(btn => btn.classList.remove('active'));
-            element.classList.add('active');
+            // Formata a hora para HH:MM
+            let hours = String(now.getHours()).padStart(2, '0');
+            let minutes = String(now.getMinutes()).padStart(2, '0');
+            let timeStr = `${hours}:${minutes}`;
             
-            // Altera o texto do botão de ação com o nome da casa
-            document.getElementById('redirect-btn').innerText = `JOGAR NA ${name.toUpperCase()} 🚀`;
-            triggerScanEffect();
-        }
-
-        function switchMode(mode, element) {
-            currentMode = mode;
-            document.querySelectorAll('.mode-tab').forEach(tab => tab.classList.remove('active'));
-            element.classList.add('active');
-            triggerScanEffect();
-        }
-
-        function triggerScanEffect() {
-            const display = document.getElementById('panel-display');
-            display.innerHTML = `<div style="color: var(--neon-orange); font-weight:bold;">Sincronizando com a API da ${currentPlatform}...</div>`;
+            // Define o multiplicador (exemplo: 2x+, 3x, 5x+ etc.)
+            let targets = ["2x+", "3x", "4x+", "2x+"];
+            let randomTarget = targets[Math.floor(Math.random() * targets.length)];
             
-            setTimeout(() => {
-                if(currentMode === 'sniper') {
-                    // MODO 1: Gera multiplicadores aleatórios sempre acima de 2x (indo de 2.05x até 14.50x)
-                    const randomMultiplier = (Math.random() * (14.5 - 2.05) + 2.05).toFixed(2);
-                    display.innerHTML = `
-                        <div style="font-size:12px; color:#8a8a98; text-transform:uppercase;">Alvo Identificado na ${currentPlatform}</div>
-                        <div class="signal-value">${randomMultiplier}X</div>
-                        <div style="font-size:12px; color: var(--neon-green); font-weight:bold;">ENTRADA CONFIRMADA (Retirar em 2.00x+)</div>
-                    `;
-                } else {
-                    // MODO 2: Gera lista com os próximos horários prováveis para velas de 2x+
-                    const now = new Date();
-                    let listHtml = '<div class="time-list">';
-                    
-                    for(let i = 1; i <= 3; i++) {
-                        // Adiciona minutos de forma espaçada no relógio
-                        now.setMinutes(now.getMinutes() + Math.floor(Math.random() * 5) + 3);
-                        const timeStr = now.toTimeString().split(' ')[0].substring(0,5);
-                        listHtml += `
-                            <div class="time-item">
-                                <span style="color:#fff; font-weight:bold;">⏱️ ${timeStr}</span>
-                                <span style="color:var(--neon-green); font-weight:bold;">Vela Branca (2x+) 🎯</span>
-                            </div>`;
-                    }
-                    listHtml += '</div>';
-                    display.innerHTML = listHtml;
-                }
-            }, 800); // 800 milissegundos de delay para simular a resposta do robô
+            // Monta o elemento HTML do sinal
+            const row = document.createElement('div');
+            row.className = 'signal-row';
+            row.innerHTML = `
+                <div class="signal-time">${timeStr}</div>
+                <div class="signal-target">Vela Branca (${randomTarget})</div>
+            `;
+            
+            container.appendChild(row);
         }
+    }
 
-        function openAffiliate() {
-            window.open(currentLink, '_blank');
-        }
+    // Executa ao carregar a página pela primeira vez
+    window.onload = generateSignals;
+</script>
 
-        // Executa o primeiro sinal automaticamente ao carregar o site
-        triggerScanEffect();
-    </script>
 </body>
 </html>
