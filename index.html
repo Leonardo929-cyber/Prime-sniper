@@ -1,453 +1,263 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>D9 CLUBE - PRIME SNIPER V2</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:'Poppins',sans-serif;
-    min-height:100vh;
-    background:
-    radial-gradient(circle at top,#351100 0%,#140707 40%,#060606 100%);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    overflow:hidden;
-}
-
-/* =========================
-APP
-========================= */
-
-.app{
-    width:100%;
-    max-width:390px;
-    height:820px;
-    background:#080808;
-    border-radius:38px;
-    overflow:hidden;
-    position:relative;
-    border:2px solid rgba(255,180,80,0.15);
-    box-shadow:
-    0 0 80px rgba(255,100,0,0.15),
-    0 20px 60px rgba(0,0,0,0.9);
-}
-
-/* =========================
-TOP BAR
-========================= */
-
-.top-bar{
-    height:95px;
-    padding:18px 20px;
-    background:linear-gradient(to bottom,#111,#1b120b);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid rgba(255,180,80,0.2);
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.logo{
-    width:45px;
-    height:45px;
-    border-radius:14px;
-    background:linear-gradient(135deg,#ff9d00,#ff3c00);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-weight:800;
-    color:#fff;
-    font-size:18px;
-    box-shadow:0 0 25px rgba(255,120,0,0.5);
-}
-
-.brand h1{
-    font-size:24px;
-    color:#fff;
-    font-weight:800;
-    letter-spacing:1px;
-}
-
-.brand span{
-    display:block;
-    color:#ff9d00;
-    font-size:11px;
-    margin-top:-3px;
-    letter-spacing:2px;
-}
-
-.menu{
-    color:#fff;
-    font-size:26px;
-}
-
-/* =========================
-BACKGROUND EFFECT
-========================= */
-
-.hero{
-    position:relative;
-    height:500px;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-}
-
-.glow{
-    position:absolute;
-    width:500px;
-    height:500px;
-    background:radial-gradient(circle,#ff3c00 0%,transparent 70%);
-    opacity:0.4;
-    top:20px;
-}
-
-.robot-circle{
-    width:280px;
-    height:280px;
-    border-radius:50%;
-    background:
-    linear-gradient(145deg,#ff3c00,#ff9900);
-    padding:6px;
-    position:relative;
-    z-index:3;
-    box-shadow:
-    0 0 50px rgba(255,80,0,0.5),
-    0 0 120px rgba(255,100,0,0.3);
-}
-
-.robot-circle img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:50%;
-}
-
-.live-badge{
-    position:absolute;
-    left:35px;
-    top:245px;
-    z-index:5;
-    background:#1a120c;
-    border:1px solid rgba(255,180,80,0.3);
-    padding:10px 18px;
-    border-radius:30px;
-    color:#fff;
-    font-weight:600;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    box-shadow:0 0 20px rgba(255,120,0,0.2);
-}
-
-.dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:#ff8c00;
-    box-shadow:0 0 15px #ff8c00;
-}
-
-.small-text{
-    margin-top:35px;
-    color:#ffb88f;
-    letter-spacing:4px;
-    font-size:13px;
-    z-index:3;
-}
-
-.main-title{
-    font-size:48px;
-    line-height:0.95;
-    text-align:center;
-    font-weight:900;
-    margin-top:12px;
-    z-index:3;
-    color:white;
-    text-shadow:
-    0 0 25px rgba(255,255,255,0.15),
-    0 0 45px rgba(255,120,0,0.25);
-}
-
-.main-title span{
-    color:#ffb000;
-}
-
-.powered{
-    margin-top:30px;
-    background:#1b120c;
-    border:1px solid rgba(255,180,80,0.25);
-    padding:14px 28px;
-    border-radius:50px;
-    color:white;
-    font-weight:600;
-    z-index:3;
-    box-shadow:0 0 25px rgba(255,100,0,0.15);
-}
-
-.powered span{
-    color:#ff9d00;
-}
-
-/* =========================
-SIGNALS
-========================= */
-
-.signal-panel{
-    position:absolute;
-    bottom:105px;
-    left:50%;
-    transform:translateX(-50%);
-    width:88%;
-    background:rgba(10,10,10,0.95);
-    border:1px solid rgba(255,180,80,0.1);
-    border-radius:24px;
-    padding:18px;
-    backdrop-filter:blur(12px);
-    z-index:10;
-}
-
-.signal-title{
-    color:#ffb88f;
-    font-size:12px;
-    letter-spacing:2px;
-    margin-bottom:15px;
-}
-
-.signal-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(255,255,255,0.03);
-    border:1px solid rgba(255,255,255,0.05);
-    padding:14px;
-    border-radius:16px;
-    margin-bottom:12px;
-}
-
-.time{
-    color:white;
-    font-weight:700;
-    font-size:16px;
-}
-
-.mult{
-    color:#ffb000;
-    font-weight:700;
-}
-
-.action-btn{
-    margin-top:10px;
-    width:100%;
-    border:none;
-    height:58px;
-    border-radius:18px;
-    background:linear-gradient(90deg,#ff7b00,#ffb300);
-    color:white;
-    font-size:16px;
-    font-weight:800;
-    cursor:pointer;
-    transition:0.3s;
-    box-shadow:0 10px 30px rgba(255,120,0,0.35);
-}
-
-.action-btn:hover{
-    transform:translateY(-3px);
-}
-
-/* =========================
-BOTTOM NAV
-========================= */
-
-.bottom-nav{
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:85px;
-    background:#070707;
-    border-top:1px solid rgba(255,180,80,0.1);
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-}
-
-.nav-item{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:5px;
-    color:#7d7d7d;
-    font-size:12px;
-}
-
-.nav-item.active{
-    color:#ff9d00;
-}
-
-.nav-icon{
-    font-size:22px;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="app">
-
-    <!-- TOP -->
-    <div class="top-bar">
-
-        <div class="brand">
-            <div class="logo">D9</div>
-
-            <div>
-                <h1>D9 CLUBE</h1>
-                <span>AI SIGNAL SYSTEM</span>
-            </div>
-        </div>
-
-        <div class="menu">☰</div>
-
-    </div>
-
-    <!-- HERO -->
-    <div class="hero">
-
-        <div class="glow"></div>
-
-        <div class="robot-circle">
-            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1200&auto=format&fit=crop" />
-        </div>
-
-        <div class="live-badge">
-            <div class="dot"></div>
-            LIVE
-        </div>
-
-        <div class="small-text">
-            YOU'RE TRADING WITH
-        </div>
-
-        <div class="main-title">
-            PRIME SNIPER <span>V2</span>
-        </div>
-
-        <div class="powered">
-            Powered by <span>D9 CLUBE</span>
-        </div>
-
-    </div>
-
-    <!-- SIGNALS -->
-    <div class="signal-panel">
-
-        <div class="signal-title">
-            HORÁRIOS IDENTIFICADOS
-        </div>
-
-        <div id="signals"></div>
-
-        <button class="action-btn" onclick="openPlatform()">
-            ENTRAR NA PLATAFORMA 🚀
-        </button>
-
-    </div>
-
-    <!-- NAV -->
-    <div class="bottom-nav">
-
-        <div class="nav-item active">
-            <div class="nav-icon">⌂</div>
-            Home
-        </div>
-
-        <div class="nav-item">
-            <div class="nav-icon">📊</div>
-            Stats
-        </div>
-
-        <div class="nav-item">
-            <div class="nav-icon">⚙</div>
-            Settings
-        </div>
-
-        <div class="nav-item">
-            <div class="nav-icon">❔</div>
-            Help
-        </div>
-
-    </div>
-
-</div>
-
-<script>
-
-const links = {
-    placard: "https://www.placard.co.mz",
-    megagamelive: "https://www.megagamelive.com/affiliates/?btag=2504724"
-};
-
-function openPlatform(){
-    window.open(links.megagamelive, "_blank");
-}
-
-function generateSignals(){
-
-    const signals = document.getElementById("signals");
-    signals.innerHTML = "";
-
-    let now = new Date();
-
-    for(let i=0;i<4;i++){
-
-        let add = Math.floor(Math.random()*3)+3;
-        now.setMinutes(now.getMinutes()+add);
-
-        let h = String(now.getHours()).padStart(2,'0');
-        let m = String(now.getMinutes()).padStart(2,'0');
-
-        const multipliers = ["2x+","3x","5x+","4x+"];
-
-        const random =
-        multipliers[Math.floor(Math.random()*multipliers.length)];
-
-        const row = document.createElement("div");
-
-        row.className = "signal-row";
-
-        row.innerHTML = `
-            <div class="time">${h}:${m}</div>
-            <div class="mult">Vela Branca (${random})</div>
-        `;
-
-        signals.appendChild(row);
-    }
-}
-
-generateSignals();
-
-</script>
-
-</body>
-</html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>D9 CLUBE - PRIME SNIPER V2</title>
+    <style>
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #0d0f14;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Container imitando o frame do smartphone da imagem */
+        .app-container {
+            width: 100%;
+            max-width: 412px;
+            height: 100vh;
+            max-height: 892px;
+            background: radial-gradient(circle at center, #151a26 0%, #0a0c10 100%);
+            border-radius: 40px;
+            border: 4px solid #1c1f26;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Status Bar (iPhone Dynamic Island Mockup) */
+        .status-bar {
+            height: 44px;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 10;
+            background: #0a0c10;
+        }
+
+        .dynamic-island {
+            width: 110px;
+            height: 30px;
+            background: #000000;
+            border-radius: 20px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 7px;
+        }
+
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* App Header */
+        .app-header {
+            padding: 16px 20px 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #2a2215 0%, #15110a 100%);
+            border: 1px solid #d4af37;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #e5c158;
+            font-size: 16px;
+            text-shadow: 0 0 8px rgba(229, 193, 88, 0.4);
+        }
+
+        .header-text h1 {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        .header-text p {
+            font-size: 11px;
+            color: #707785;
+            margin-top: 1px;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #707785;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Tabs (Placard / Megagamelive) */
+        .tabs-container {
+            padding: 0 20px;
+            margin-bottom: 12px;
+        }
+
+        .tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #8a93a6;
+            padding: 10px 0;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Seção de Horários Identificados */
+        .signals-panel {
+            margin: 0 20px 15px 20px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 12px 16px;
+        }
+
+        .panel-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .signals-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+        }
+
+        .signal-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11.5px;
+            color: #d1d5db;
+        }
+
+        .signal-item span.time {
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .signal-item span.time::before {
+            content: "🕒";
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .signal-item span.target {
+            color: #e5c158;
+            font-weight: 600;
+        }
+
+        /* Target / Radar Hero Section */
+        .hero-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .radar-container {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #10141e 40%, #05070a 100%);
+            border: 6px solid #1a1e26;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 40px rgba(229, 193, 88, 0.15), inset 0 0 20px rgba(0,0,0,0.8);
+            margin-bottom: 25px;
+        }
+
+        /* Brilho dourado externo simétrico ao da imagem */
+        .radar-container::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 50%;
+            border: 1px solid rgba(229, 193, 88, 0.4);
+            pointer-events: none;
+        }
+
+        /* Retículo do Sniper */
+        .radar-crosshair {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .radar-crosshair::before {
+            content: '';
+            position: absolute;
+            top: 15%; bottom: 15%; left: 50%;
+            width: 1px;
+            background: rgba(229, 193, 88, 0.25);
+        }
+
+        .radar-crosshair::after {
+            content: '';
+            position: absolute;
+            left: 15%; right: 15
