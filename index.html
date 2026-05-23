@@ -1,263 +1,969 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>D9 CLUBE - PRIME SNIPER V2</title>
-    <style>
-        /* Reset & Base Styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        body {
-            background-color: #0d0f14;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 0;
-            overflow-x: hidden;
-        }
+<title>D9 CLUBE • PRIME SNIPER V2</title>
 
-        /* Container imitando o frame do smartphone da imagem */
-        .app-container {
-            width: 100%;
-            max-width: 412px;
-            height: 100vh;
-            max-height: 892px;
-            background: radial-gradient(circle at center, #151a26 0%, #0a0c10 100%);
-            border-radius: 40px;
-            border: 4px solid #1c1f26;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-        /* Status Bar (iPhone Dynamic Island Mockup) */
-        .status-bar {
-            height: 44px;
-            padding: 0 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            font-weight: 600;
-            z-index: 10;
-            background: #0a0c10;
-        }
+<style>
 
-        .dynamic-island {
-            width: 110px;
-            height: 30px;
-            background: #000000;
-            border-radius: 20px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: 7px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
 
-        .status-right {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:15px;
 
-        /* App Header */
-        .app-header {
-            padding: 16px 20px 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    font-family:'Poppins',sans-serif;
 
-        .profile-section {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+    background:
+    radial-gradient(circle at top,
+    #2c1400 0%,
+    #130d08 30%,
+    #090b10 65%,
+    #040506 100%);
 
-        .logo-box {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #2a2215 0%, #15110a 100%);
-            border: 1px solid #d4af37;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            color: #e5c158;
-            font-size: 16px;
-            text-shadow: 0 0 8px rgba(229, 193, 88, 0.4);
-        }
+    overflow:hidden;
+}
 
-        .header-text h1 {
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            color: #ffffff;
-        }
+/* Glow ambiente */
 
-        .header-text p {
-            font-size: 11px;
-            color: #707785;
-            margin-top: 1px;
-        }
+body::before{
+    content:'';
+    position:fixed;
+    width:700px;
+    height:700px;
 
-        .logout-btn {
-            background: none;
-            border: none;
-            color: #707785;
-            font-size: 20px;
-            cursor: pointer;
-        }
+    background:
+    radial-gradient(circle,
+    rgba(255,140,0,0.12),
+    transparent 70%);
 
-        /* Tabs (Placard / Megagamelive) */
-        .tabs-container {
-            padding: 0 20px;
-            margin-bottom: 12px;
-        }
+    top:-250px;
+    left:50%;
+    transform:translateX(-50%);
 
-        .tabs {
-            display: flex;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 12px;
-            padding: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.02);
-        }
+    animation:pulse 6s ease-in-out infinite;
+}
 
-        .tab-btn {
-            flex: 1;
-            background: none;
-            border: none;
-            color: #8a93a6;
-            padding: 10px 0;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-        }
+@keyframes pulse{
+    0%{opacity:.5;transform:translateX(-50%) scale(1);}
+    50%{opacity:1;transform:translateX(-50%) scale(1.08);}
+    100%{opacity:.5;transform:translateX(-50%) scale(1);}
+}
 
-        .tab-btn.active {
-            background: rgba(255, 255, 255, 0.12);
-            color: #ffffff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
+/* APP */
 
-        /* Seção de Horários Identificados */
-        .signals-panel {
-            margin: 0 20px 15px 20px;
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 12px 16px;
-        }
+.app-container{
 
-        .panel-title {
-            font-size: 13px;
-            font-weight: 600;
-            text-align: center;
-            color: #ffffff;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-        }
+    width:100%;
+    max-width:390px;
+    height:820px;
 
-        .signals-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px 16px;
-        }
+    position:relative;
+    overflow:hidden;
 
-        .signal-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11.5px;
-            color: #d1d5db;
-        }
+    border-radius:38px;
 
-        .signal-item span.time {
-            font-weight: 700;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
+    background:
+    linear-gradient(180deg,
+    rgba(18,20,27,.98) 0%,
+    rgba(8,10,14,.98) 100%);
 
-        .signal-item span.time::before {
-            content: "🕒";
-            font-size: 10px;
-            opacity: 0.7;
-        }
+    border:
+    1px solid rgba(255,255,255,.05);
 
-        .signal-item span.target {
-            color: #e5c158;
-            font-weight: 600;
-        }
+    backdrop-filter:blur(30px);
 
-        /* Target / Radar Hero Section */
-        .hero-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            padding-bottom: 20px;
-        }
+    box-shadow:
+    0 0 0 1px rgba(255,255,255,.03),
+    0 40px 100px rgba(0,0,0,.9),
+    0 0 100px rgba(255,140,0,.08);
 
-        .radar-container {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #10141e 40%, #05070a 100%);
-            border: 6px solid #1a1e26;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 40px rgba(229, 193, 88, 0.15), inset 0 0 20px rgba(0,0,0,0.8);
-            margin-bottom: 25px;
-        }
+}
 
-        /* Brilho dourado externo simétrico ao da imagem */
-        .radar-container::after {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            border-radius: 50%;
-            border: 1px solid rgba(229, 193, 88, 0.4);
-            pointer-events: none;
-        }
+/* Linha dourada */
 
-        /* Retículo do Sniper */
-        .radar-crosshair {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            pointer-events: none;
-        }
+.app-container::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:2px;
 
-        .radar-crosshair::before {
-            content: '';
-            position: absolute;
-            top: 15%; bottom: 15%; left: 50%;
-            width: 1px;
-            background: rgba(229, 193, 88, 0.25);
-        }
+    background:
+    linear-gradient(90deg,
+    transparent,
+    #f5c96a,
+    transparent);
+}
 
-        .radar-crosshair::after {
-            content: '';
-            position: absolute;
-            left: 15%; right: 15
+/* HEADER */
+
+.header{
+
+    padding:28px 25px 20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* BRAND */
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+
+    width:50px;
+    height:50px;
+
+    border-radius:14px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-weight:800;
+    font-size:17px;
+
+    color:#fff;
+
+    background:
+    linear-gradient(145deg,
+    #ffb300,
+    #ff7300);
+
+    box-shadow:
+    0 0 25px rgba(255,140,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.25);
+
+}
+
+.brand-text h1{
+
+    color:#fff;
+    font-size:18px;
+    font-weight:800;
+    letter-spacing:1px;
+
+}
+
+.brand-text span{
+
+    color:#8f96a8;
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+}
+
+/* MENU */
+
+.menu{
+    color:#8f96a8;
+    font-size:24px;
+}
+
+/* TABS */
+
+.platform-box{
+
+    display:flex;
+    gap:12px;
+
+    padding:0 22px;
+    margin-bottom:18px;
+}
+
+.platform-btn{
+
+    flex:1;
+
+    height:48px;
+
+    border:none;
+    border-radius:14px;
+
+    background:
+    rgba(255,255,255,.03);
+
+    color:#7f8799;
+
+    font-size:13px;
+    font-weight:700;
+
+    border:
+    1px solid rgba(255,255,255,.04);
+
+    transition:.35s ease;
+
+    cursor:pointer;
+}
+
+.platform-btn.active{
+
+    color:#fff;
+
+    background:
+    linear-gradient(145deg,
+    rgba(255,180,0,.18),
+    rgba(255,120,0,.08));
+
+    border:
+    1px solid rgba(255,190,0,.18);
+
+    box-shadow:
+    0 10px 25px rgba(255,150,0,.15);
+
+}
+
+/* HERO */
+
+.hero{
+
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+}
+
+/* Radar */
+
+.radar{
+
+    width:270px;
+    height:270px;
+
+    border-radius:50%;
+
+    position:relative;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    radial-gradient(circle at center,
+    #141b27 0%,
+    #0a0d13 70%,
+    #050608 100%);
+
+    border:
+    1px solid rgba(255,200,100,.18);
+
+    box-shadow:
+    0 0 60px rgba(255,170,0,.10),
+    inset 0 0 40px rgba(0,0,0,.85);
+
+    animation:float 5s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+    100%{transform:translateY(0);}
+}
+
+/* Glow */
+
+.radar::before{
+
+    content:'';
+
+    position:absolute;
+    inset:-25px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(255,140,0,.12),
+    transparent 70%);
+
+}
+
+/* Crosshair */
+
+.crosshair{
+
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:50%;
+}
+
+.crosshair::before{
+
+    content:'';
+
+    position:absolute;
+
+    left:50%;
+    top:10%;
+    bottom:10%;
+
+    width:1px;
+
+    background:
+    linear-gradient(to bottom,
+    transparent,
+    rgba(255,210,120,.35),
+    transparent);
+
+}
+
+.crosshair::after{
+
+    content:'';
+
+    position:absolute;
+
+    top:50%;
+    left:10%;
+    right:10%;
+
+    height:1px;
+
+    background:
+    linear-gradient(to right,
+    transparent,
+    rgba(255,210,120,.35),
+    transparent);
+
+}
+
+/* Circulos internos */
+
+.circle1,
+.circle2{
+
+    position:absolute;
+    border-radius:50%;
+    border:1px solid rgba(255,210,120,.08);
+
+}
+
+.circle1{
+    width:180px;
+    height:180px;
+}
+
+.circle2{
+    width:110px;
+    height:110px;
+}
+
+/* Centro */
+
+.center-dot{
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:#ffb000;
+
+    box-shadow:
+    0 0 20px rgba(255,176,0,.8);
+
+}
+
+/* TITLES */
+
+.mini-title{
+
+    margin-top:35px;
+
+    color:#ffca7a;
+
+    letter-spacing:4px;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+}
+
+.main-title{
+
+    margin-top:12px;
+
+    text-align:center;
+
+    font-size:42px;
+    line-height:1;
+
+    font-weight:900;
+
+    color:#fff;
+
+    text-shadow:
+    0 0 30px rgba(255,255,255,.08);
+}
+
+.main-title span{
+    color:#ffb300;
+}
+
+/* POWERED */
+
+.powered{
+
+    margin-top:25px;
+
+    padding:13px 24px;
+
+    border-radius:50px;
+
+    background:
+    rgba(255,255,255,.03);
+
+    border:
+    1px solid rgba(255,255,255,.05);
+
+    color:#fff;
+
+    font-size:13px;
+    font-weight:600;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.25);
+}
+
+.powered span{
+    color:#ffb300;
+}
+
+/* PANEL */
+
+.panel{
+
+    margin:0 20px 18px;
+
+    padding:18px;
+
+    border-radius:22px;
+
+    background:
+    linear-gradient(180deg,
+    rgba(20,24,31,.95),
+    rgba(8,10,14,.95));
+
+    border:
+    1px solid rgba(255,255,255,.05);
+
+    box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 20px 40px rgba(0,0,0,.35);
+
+}
+
+/* TITLE */
+
+.panel-title{
+
+    text-align:center;
+
+    color:#ffca7a;
+
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+
+    margin-bottom:16px;
+}
+
+/* SIGNAL ROW */
+
+.signal-row{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:14px 15px;
+
+    border-radius:14px;
+
+    background:
+    rgba(255,255,255,.025);
+
+    border:
+    1px solid rgba(255,255,255,.04);
+
+    margin-bottom:12px;
+
+    transition:.3s ease;
+}
+
+.signal-row:hover{
+
+    transform:translateY(-2px);
+
+    background:
+    rgba(255,255,255,.04);
+
+}
+
+/* TIME */
+
+.signal-time{
+
+    color:#fff;
+
+    font-size:14px;
+    font-weight:700;
+
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.signal-time::before{
+
+    content:'●';
+
+    color:#ffb300;
+
+    font-size:10px;
+
+    animation:blink 1.3s infinite;
+}
+
+@keyframes blink{
+    0%{opacity:1;}
+    50%{opacity:.3;}
+    100%{opacity:1;}
+}
+
+/* TARGET */
+
+.signal-target{
+
+    color:#ffca7a;
+
+    font-size:13px;
+    font-weight:700;
+
+    text-shadow:
+    0 0 12px rgba(255,180,0,.15);
+}
+
+/* BUTTON */
+
+.btn-main{
+
+    width:100%;
+    height:58px;
+
+    border:none;
+    border-radius:18px;
+
+    margin-top:8px;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:1px;
+
+    background:
+    linear-gradient(135deg,
+    #ffca4f 0%,
+    #ff8a00 100%);
+
+    box-shadow:
+    0 18px 35px rgba(255,140,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.25);
+
+    position:relative;
+    overflow:hidden;
+
+    transition:.35s ease;
+}
+
+/* Shine */
+
+.btn-main::before{
+
+    content:'';
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:60%;
+    height:100%;
+
+    background:
+    linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.25),
+    transparent);
+
+    transform:skewX(-20deg);
+
+    animation:shine 3s infinite;
+}
+
+@keyframes shine{
+    0%{left:-100%;}
+    100%{left:150%;}
+}
+
+.btn-main:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 22px 45px rgba(255,140,0,.38);
+
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+
+    height:82px;
+
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+
+    background:
+    rgba(6,8,10,.95);
+
+    border-top:
+    1px solid rgba(255,255,255,.04);
+
+    backdrop-filter:blur(20px);
+}
+
+/* NAV ITEM */
+
+.nav-item{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+
+    color:#737b8c;
+
+    font-size:11px;
+
+    transition:.3s ease;
+}
+
+.nav-item.active{
+
+    color:#ffca4f;
+
+    text-shadow:
+    0 0 12px rgba(255,190,0,.25);
+
+}
+
+.nav-item:hover{
+    transform:translateY(-2px);
+}
+
+.nav-icon{
+    font-size:20px;
+}
+
+/* MOBILE */
+
+@media(max-width:420px){
+
+    body{
+        padding:0;
+    }
+
+    .app-container{
+        border-radius:0;
+        height:100vh;
+        max-width:100%;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="brand">
+
+            <div class="logo">
+                D9
+            </div>
+
+            <div class="brand-text">
+                <h1>D9 CLUBE</h1>
+                <span>Prime Sniper AI</span>
+            </div>
+
+        </div>
+
+        <div class="menu">☰</div>
+
+    </div>
+
+    <!-- TABS -->
+
+    <div class="platform-box">
+
+        <button class="platform-btn active"
+        onclick="selectPlatform('placard',this)">
+        Placard
+        </button>
+
+        <button class="platform-btn"
+        onclick="selectPlatform('megagamelive',this)">
+        Megagamelive
+        </button>
+
+    </div>
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <div class="radar">
+
+            <div class="crosshair"></div>
+
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+
+            <div class="center-dot"></div>
+
+        </div>
+
+        <div class="mini-title">
+            YOU'RE TRADING WITH
+        </div>
+
+        <div class="main-title">
+            PRIME SNIPER <span>V2</span>
+        </div>
+
+        <div class="powered">
+            Powered by <span>D9 CLUBE</span>
+        </div>
+
+    </div>
+
+    <!-- PANEL -->
+
+    <div class="panel">
+
+        <div class="panel-title">
+            Horários Identificados
+        </div>
+
+        <div id="signals-list"></div>
+
+        <button class="btn-main"
+        id="action-btn"
+        onclick="goToPlatform()">
+
+        ENTRAR AGORA 🚀
+
+        </button>
+
+    </div>
+
+    <!-- NAV -->
+
+    <div class="bottom-nav">
+
+        <div class="nav-item active">
+            <div class="nav-icon">⌂</div>
+            Home
+        </div>
+
+        <div class="nav-item">
+            <div class="nav-icon">📊</div>
+            Stats
+        </div>
+
+        <div class="nav-item">
+            <div class="nav-icon">⚙</div>
+            Config
+        </div>
+
+        <div class="nav-item">
+            <div class="nav-icon">❔</div>
+            Help
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* =========================
+CONFIG
+========================= */
+
+let currentPlatform='placard';
+
+const links={
+
+placard:'https://www.placard.co.mz',
+
+megagamelive:
+'https://www.megagamelive.com/affiliates/?btag=2504724'
+
+};
+
+/* =========================
+SELECT PLATFORM
+========================= */
+
+function selectPlatform(platform,element){
+
+    currentPlatform=platform;
+
+    document
+    .querySelectorAll('.platform-btn')
+    .forEach(btn=>btn.classList.remove('active'));
+
+    element.classList.add('active');
+
+    const btn=document.getElementById('action-btn');
+
+    if(platform==='megagamelive'){
+
+        btn.innerText='JOGAR NA MEGAGAMELIVE 🚀';
+
+    }else{
+
+        btn.innerText='JOGAR NA PLACARD 🚀';
+
+    }
+
+    generateSignals();
+
+}
+
+/* =========================
+OPEN PLATFORM
+========================= */
+
+function goToPlatform(){
+
+    window.open(
+    links[currentPlatform],
+    '_blank');
+
+}
+
+/* =========================
+GENERATE SIGNALS
+========================= */
+
+function generateSignals(){
+
+    const container=
+    document.getElementById('signals-list');
+
+    container.innerHTML='';
+
+    let now=new Date();
+
+    for(let i=0;i<5;i++){
+
+        let randomMinutes=
+        Math.floor(Math.random()*3)+2;
+
+        now.setMinutes(
+        now.getMinutes()+randomMinutes);
+
+        let hours=
+        String(now.getHours())
+        .padStart(2,'0');
+
+        let minutes=
+        String(now.getMinutes())
+        .padStart(2,'0');
+
+        let timeStr=
+        `${hours}:${minutes}`;
+
+        let targets=[
+        '2x',
+        '3x',
+        '5x',
+        '4x',
+        '7x'
+        ];
+
+        let randomTarget=
+        targets[
+        Math.floor(
+        Math.random()*targets.length
+        )];
+
+        const row=
+        document.createElement('div');
+
+        row.className='signal-row';
+
+        row.innerHTML=`
+
+        <div class="signal-time">
+        ${timeStr}
+        </div>
+
+        <div class="signal-target">
+        Vela Branca (${randomTarget})
+        </div>
+
+        `;
+
+        container.appendChild(row);
+
+    }
+
+}
+
+window.onload=generateSignals;
+
+</script>
+
+</body>
+</html>
