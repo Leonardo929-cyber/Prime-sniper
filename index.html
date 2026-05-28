@@ -1,969 +1,137 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<title>D9 CLUBE • PRIME SNIPER V2</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
-
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:15px;
-
-    font-family:'Poppins',sans-serif;
-
-    background:
-    radial-gradient(circle at top,
-    #2c1400 0%,
-    #130d08 30%,
-    #090b10 65%,
-    #040506 100%);
-
-    overflow:hidden;
-}
-
-/* Glow ambiente */
-
-body::before{
-    content:'';
-    position:fixed;
-    width:700px;
-    height:700px;
-
-    background:
-    radial-gradient(circle,
-    rgba(255,140,0,0.12),
-    transparent 70%);
-
-    top:-250px;
-    left:50%;
-    transform:translateX(-50%);
-
-    animation:pulse 6s ease-in-out infinite;
-}
-
-@keyframes pulse{
-    0%{opacity:.5;transform:translateX(-50%) scale(1);}
-    50%{opacity:1;transform:translateX(-50%) scale(1.08);}
-    100%{opacity:.5;transform:translateX(-50%) scale(1);}
-}
-
-/* APP */
-
-.app-container{
-
-    width:100%;
-    max-width:390px;
-    height:820px;
-
-    position:relative;
-    overflow:hidden;
-
-    border-radius:38px;
-
-    background:
-    linear-gradient(180deg,
-    rgba(18,20,27,.98) 0%,
-    rgba(8,10,14,.98) 100%);
-
-    border:
-    1px solid rgba(255,255,255,.05);
-
-    backdrop-filter:blur(30px);
-
-    box-shadow:
-    0 0 0 1px rgba(255,255,255,.03),
-    0 40px 100px rgba(0,0,0,.9),
-    0 0 100px rgba(255,140,0,.08);
-
-}
-
-/* Linha dourada */
-
-.app-container::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:2px;
-
-    background:
-    linear-gradient(90deg,
-    transparent,
-    #f5c96a,
-    transparent);
-}
-
-/* HEADER */
-
-.header{
-
-    padding:28px 25px 20px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-/* BRAND */
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.logo{
-
-    width:50px;
-    height:50px;
-
-    border-radius:14px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-weight:800;
-    font-size:17px;
-
-    color:#fff;
-
-    background:
-    linear-gradient(145deg,
-    #ffb300,
-    #ff7300);
-
-    box-shadow:
-    0 0 25px rgba(255,140,0,.25),
-    inset 0 1px 0 rgba(255,255,255,.25);
-
-}
-
-.brand-text h1{
-
-    color:#fff;
-    font-size:18px;
-    font-weight:800;
-    letter-spacing:1px;
-
-}
-
-.brand-text span{
-
-    color:#8f96a8;
-    font-size:10px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-
-}
-
-/* MENU */
-
-.menu{
-    color:#8f96a8;
-    font-size:24px;
-}
-
-/* TABS */
-
-.platform-box{
-
-    display:flex;
-    gap:12px;
-
-    padding:0 22px;
-    margin-bottom:18px;
-}
-
-.platform-btn{
-
-    flex:1;
-
-    height:48px;
-
-    border:none;
-    border-radius:14px;
-
-    background:
-    rgba(255,255,255,.03);
-
-    color:#7f8799;
-
-    font-size:13px;
-    font-weight:700;
-
-    border:
-    1px solid rgba(255,255,255,.04);
-
-    transition:.35s ease;
-
-    cursor:pointer;
-}
-
-.platform-btn.active{
-
-    color:#fff;
-
-    background:
-    linear-gradient(145deg,
-    rgba(255,180,0,.18),
-    rgba(255,120,0,.08));
-
-    border:
-    1px solid rgba(255,190,0,.18);
-
-    box-shadow:
-    0 10px 25px rgba(255,150,0,.15);
-
-}
-
-/* HERO */
-
-.hero{
-
-    flex:1;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    position:relative;
-}
-
-/* Radar */
-
-.radar{
-
-    width:270px;
-    height:270px;
-
-    border-radius:50%;
-
-    position:relative;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background:
-    radial-gradient(circle at center,
-    #141b27 0%,
-    #0a0d13 70%,
-    #050608 100%);
-
-    border:
-    1px solid rgba(255,200,100,.18);
-
-    box-shadow:
-    0 0 60px rgba(255,170,0,.10),
-    inset 0 0 40px rgba(0,0,0,.85);
-
-    animation:float 5s ease-in-out infinite;
-}
-
-@keyframes float{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(-8px);}
-    100%{transform:translateY(0);}
-}
-
-/* Glow */
-
-.radar::before{
-
-    content:'';
-
-    position:absolute;
-    inset:-25px;
-
-    border-radius:50%;
-
-    background:
-    radial-gradient(circle,
-    rgba(255,140,0,.12),
-    transparent 70%);
-
-}
-
-/* Crosshair */
-
-.crosshair{
-
-    position:absolute;
-    width:100%;
-    height:100%;
-    border-radius:50%;
-}
-
-.crosshair::before{
-
-    content:'';
-
-    position:absolute;
-
-    left:50%;
-    top:10%;
-    bottom:10%;
-
-    width:1px;
-
-    background:
-    linear-gradient(to bottom,
-    transparent,
-    rgba(255,210,120,.35),
-    transparent);
-
-}
-
-.crosshair::after{
-
-    content:'';
-
-    position:absolute;
-
-    top:50%;
-    left:10%;
-    right:10%;
-
-    height:1px;
-
-    background:
-    linear-gradient(to right,
-    transparent,
-    rgba(255,210,120,.35),
-    transparent);
-
-}
-
-/* Circulos internos */
-
-.circle1,
-.circle2{
-
-    position:absolute;
-    border-radius:50%;
-    border:1px solid rgba(255,210,120,.08);
-
-}
-
-.circle1{
-    width:180px;
-    height:180px;
-}
-
-.circle2{
-    width:110px;
-    height:110px;
-}
-
-/* Centro */
-
-.center-dot{
-
-    width:10px;
-    height:10px;
-
-    border-radius:50%;
-
-    background:#ffb000;
-
-    box-shadow:
-    0 0 20px rgba(255,176,0,.8);
-
-}
-
-/* TITLES */
-
-.mini-title{
-
-    margin-top:35px;
-
-    color:#ffca7a;
-
-    letter-spacing:4px;
-
-    font-size:11px;
-
-    text-transform:uppercase;
-}
-
-.main-title{
-
-    margin-top:12px;
-
-    text-align:center;
-
-    font-size:42px;
-    line-height:1;
-
-    font-weight:900;
-
-    color:#fff;
-
-    text-shadow:
-    0 0 30px rgba(255,255,255,.08);
-}
-
-.main-title span{
-    color:#ffb300;
-}
-
-/* POWERED */
-
-.powered{
-
-    margin-top:25px;
-
-    padding:13px 24px;
-
-    border-radius:50px;
-
-    background:
-    rgba(255,255,255,.03);
-
-    border:
-    1px solid rgba(255,255,255,.05);
-
-    color:#fff;
-
-    font-size:13px;
-    font-weight:600;
-
-    box-shadow:
-    0 10px 25px rgba(0,0,0,.25);
-}
-
-.powered span{
-    color:#ffb300;
-}
-
-/* PANEL */
-
-.panel{
-
-    margin:0 20px 18px;
-
-    padding:18px;
-
-    border-radius:22px;
-
-    background:
-    linear-gradient(180deg,
-    rgba(20,24,31,.95),
-    rgba(8,10,14,.95));
-
-    border:
-    1px solid rgba(255,255,255,.05);
-
-    box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.03),
-    0 20px 40px rgba(0,0,0,.35);
-
-}
-
-/* TITLE */
-
-.panel-title{
-
-    text-align:center;
-
-    color:#ffca7a;
-
-    font-size:11px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-
-    margin-bottom:16px;
-}
-
-/* SIGNAL ROW */
-
-.signal-row{
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding:14px 15px;
-
-    border-radius:14px;
-
-    background:
-    rgba(255,255,255,.025);
-
-    border:
-    1px solid rgba(255,255,255,.04);
-
-    margin-bottom:12px;
-
-    transition:.3s ease;
-}
-
-.signal-row:hover{
-
-    transform:translateY(-2px);
-
-    background:
-    rgba(255,255,255,.04);
-
-}
-
-/* TIME */
-
-.signal-time{
-
-    color:#fff;
-
-    font-size:14px;
-    font-weight:700;
-
-    display:flex;
-    align-items:center;
-    gap:7px;
-}
-
-.signal-time::before{
-
-    content:'●';
-
-    color:#ffb300;
-
-    font-size:10px;
-
-    animation:blink 1.3s infinite;
-}
-
-@keyframes blink{
-    0%{opacity:1;}
-    50%{opacity:.3;}
-    100%{opacity:1;}
-}
-
-/* TARGET */
-
-.signal-target{
-
-    color:#ffca7a;
-
-    font-size:13px;
-    font-weight:700;
-
-    text-shadow:
-    0 0 12px rgba(255,180,0,.15);
-}
-
-/* BUTTON */
-
-.btn-main{
-
-    width:100%;
-    height:58px;
-
-    border:none;
-    border-radius:18px;
-
-    margin-top:8px;
-
-    cursor:pointer;
-
-    color:#fff;
-
-    font-size:14px;
-    font-weight:800;
-    letter-spacing:1px;
-
-    background:
-    linear-gradient(135deg,
-    #ffca4f 0%,
-    #ff8a00 100%);
-
-    box-shadow:
-    0 18px 35px rgba(255,140,0,.28),
-    inset 0 1px 0 rgba(255,255,255,.25);
-
-    position:relative;
-    overflow:hidden;
-
-    transition:.35s ease;
-}
-
-/* Shine */
-
-.btn-main::before{
-
-    content:'';
-
-    position:absolute;
-
-    top:0;
-    left:-100%;
-
-    width:60%;
-    height:100%;
-
-    background:
-    linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.25),
-    transparent);
-
-    transform:skewX(-20deg);
-
-    animation:shine 3s infinite;
-}
-
-@keyframes shine{
-    0%{left:-100%;}
-    100%{left:150%;}
-}
-
-.btn-main:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:
-    0 22px 45px rgba(255,140,0,.38);
-
-}
-
-/* BOTTOM NAV */
-
-.bottom-nav{
-
-    height:82px;
-
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-
-    background:
-    rgba(6,8,10,.95);
-
-    border-top:
-    1px solid rgba(255,255,255,.04);
-
-    backdrop-filter:blur(20px);
-}
-
-/* NAV ITEM */
-
-.nav-item{
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:6px;
-
-    color:#737b8c;
-
-    font-size:11px;
-
-    transition:.3s ease;
-}
-
-.nav-item.active{
-
-    color:#ffca4f;
-
-    text-shadow:
-    0 0 12px rgba(255,190,0,.25);
-
-}
-
-.nav-item:hover{
-    transform:translateY(-2px);
-}
-
-.nav-icon{
-    font-size:20px;
-}
-
-/* MOBILE */
-
-@media(max-width:420px){
-
-    body{
-        padding:0;
-    }
-
-    .app-container{
-        border-radius:0;
-        height:100vh;
-        max-width:100%;
-    }
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bónus Exclusivo</title>
+    <style>
+        /* Reset de estilos básicos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Container principal para manter o aspeto mobile-first */
+        .container {
+            max-width: 450px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Título Principal */
+        h1 {
+            color: #FFD700; /* Amarelo ouro */
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Texto de Destaque */
+        .highlight-text {
+            font-size: 1.05rem;
+            font-weight: bold;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+
+        /* Texto Descritivo Secundário */
+        .description-text {
+            color: #b3b3b3; /* Cinza claro para legibilidade */
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 35px;
+            padding: 0 15px;
+        }
+
+        /* Botão de Ação */
+        .cta-button {
+            display: block;
+            width: 90%;
+            background-color: #00FF00; /* Verde limão vibrante */
+            color: #000000;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+            transition: transform 0.2s, background-color 0.2s;
+            margin-bottom: 40px;
+        }
+
+        .cta-button:hover {
+            background-color: #00E600;
+            transform: scale(1.02);
+        }
+
+        /* Notificação de Prova Social (Fundo da página) */
+        .notification-toast {
+            background-color: #111111;
+            border-left: 4px solid #00FF00;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            width: 90%;
+            max-width: 380px;
+            color: #ffffff;
+            margin-top: auto; /* Força a ficar na parte inferior se houver espaço */
+        }
+
+        .notification-toast span.name {
+            color: #00FF00;
+            font-weight: bold;
+        }
+
+        .notification-toast span.prize {
+            color: #FFD700;
+            font-weight: bold;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="app-container">
+    <div class="container">
+        
+        <h1>RECEBA ATÉ 5.000 MT<br>EM BÓNUS</h1>
 
-    <!-- HEADER -->
+        <p class="highlight-text">
+            Crie a sua conta agora, efetue um depósito mínimo de 100 MT e garanta 25 apostas grátis com 100% de bónus no primeiro depósito.
+        </p>
 
-    <div class="header">
+        <p class="description-text">
+            Aproveite prémios exclusivos, participe das melhores chuvas do Aviator e jogue com vantagens reais desde o primeiro acesso.
+        </p>
 
-        <div class="brand">
+        <a href="https://media1.placard.co.mz/redirect.aspx?pid=8332&bid=1690" class="cta-button">
+            REGISTAR SE AGORA
+        </a>
 
-            <div class="logo">
-                D9
-            </div>
-
-            <div class="brand-text">
-                <h1>D9 CLUBE</h1>
-                <span>Prime Sniper AI</span>
-            </div>
-
-        </div>
-
-        <div class="menu">☰</div>
-
-    </div>
-
-    <!-- TABS -->
-
-    <div class="platform-box">
-
-        <button class="platform-btn active"
-        onclick="selectPlatform('placard',this)">
-        Placard
-        </button>
-
-        <button class="platform-btn"
-        onclick="selectPlatform('megagamelive',this)">
-        Megagamelive
-        </button>
-
-    </div>
-
-    <!-- HERO -->
-
-    <div class="hero">
-
-        <div class="radar">
-
-            <div class="crosshair"></div>
-
-            <div class="circle1"></div>
-            <div class="circle2"></div>
-
-            <div class="center-dot"></div>
-
-        </div>
-
-        <div class="mini-title">
-            YOU'RE TRADING WITH
-        </div>
-
-        <div class="main-title">
-            PRIME SNIPER <span>V2</span>
-        </div>
-
-        <div class="powered">
-            Powered by <span>D9 CLUBE</span>
+        <div class="notification-toast">
+            <span class="name">Dércio V.</span> acabou de receber <span class="prize">25 Voos Grátis</span>
         </div>
 
     </div>
-
-    <!-- PANEL -->
-
-    <div class="panel">
-
-        <div class="panel-title">
-            Horários Identificados
-        </div>
-
-        <div id="signals-list"></div>
-
-        <button class="btn-main"
-        id="action-btn"
-        onclick="goToPlatform()">
-
-        ENTRAR AGORA 🚀
-
-        </button>
-
-    </div>
-
-    <!-- NAV -->
-
-    <div class="bottom-nav">
-
-        <div class="nav-item active">
-            <div class="nav-icon">⌂</div>
-            Home
-        </div>
-
-        <div class="nav-item">
-            <div class="nav-icon">📊</div>
-            Stats
-        </div>
-
-        <div class="nav-item">
-            <div class="nav-icon">⚙</div>
-            Config
-        </div>
-
-        <div class="nav-item">
-            <div class="nav-icon">❔</div>
-            Help
-        </div>
-
-    </div>
-
-</div>
-
-<script>
-
-/* =========================
-CONFIG
-========================= */
-
-let currentPlatform='placard';
-
-const links={
-
-placard:'https://www.placard.co.mz',
-
-megagamelive:
-'https://www.megagamelive.com/affiliates/?btag=2504724'
-
-};
-
-/* =========================
-SELECT PLATFORM
-========================= */
-
-function selectPlatform(platform,element){
-
-    currentPlatform=platform;
-
-    document
-    .querySelectorAll('.platform-btn')
-    .forEach(btn=>btn.classList.remove('active'));
-
-    element.classList.add('active');
-
-    const btn=document.getElementById('action-btn');
-
-    if(platform==='megagamelive'){
-
-        btn.innerText='JOGAR NA MEGAGAMELIVE 🚀';
-
-    }else{
-
-        btn.innerText='JOGAR NA PLACARD 🚀';
-
-    }
-
-    generateSignals();
-
-}
-
-/* =========================
-OPEN PLATFORM
-========================= */
-
-function goToPlatform(){
-
-    window.open(
-    links[currentPlatform],
-    '_blank');
-
-}
-
-/* =========================
-GENERATE SIGNALS
-========================= */
-
-function generateSignals(){
-
-    const container=
-    document.getElementById('signals-list');
-
-    container.innerHTML='';
-
-    let now=new Date();
-
-    for(let i=0;i<5;i++){
-
-        let randomMinutes=
-        Math.floor(Math.random()*3)+2;
-
-        now.setMinutes(
-        now.getMinutes()+randomMinutes);
-
-        let hours=
-        String(now.getHours())
-        .padStart(2,'0');
-
-        let minutes=
-        String(now.getMinutes())
-        .padStart(2,'0');
-
-        let timeStr=
-        `${hours}:${minutes}`;
-
-        let targets=[
-        '2x',
-        '3x',
-        '5x',
-        '4x',
-        '7x'
-        ];
-
-        let randomTarget=
-        targets[
-        Math.floor(
-        Math.random()*targets.length
-        )];
-
-        const row=
-        document.createElement('div');
-
-        row.className='signal-row';
-
-        row.innerHTML=`
-
-        <div class="signal-time">
-        ${timeStr}
-        </div>
-
-        <div class="signal-target">
-        Vela Branca (${randomTarget})
-        </div>
-
-        `;
-
-        container.appendChild(row);
-
-    }
-
-}
-
-window.onload=generateSignals;
-
-</script>
 
 </body>
 </html>
